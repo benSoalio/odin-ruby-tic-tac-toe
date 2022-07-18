@@ -9,6 +9,31 @@ class Player
   end
 end
 
+# Board class
+class Board
+
+  
+  def initialize
+    @cell = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  end
+
+  
+  def show 
+    puts "
+    #{@cell[0]} | #{@cell[1]} | #{@cell[2]}
+    ---------
+    #{@cell[3]} | #{@cell[4]} | #{@cell[5]}
+    ---------
+    #{@cell[6]} | #{@cell[7]} | #{@cell[8]}
+    "
+  end
+
+  def update (position, sign)
+    @cell[position - 1] = sign
+  end
+
+end
+
 # Game Class
 class Game
   WINNING_COMBO = [[1, 2, 3], [1, 4, 7], [1, 5, 9], [4, 5, 6], [2, 5, 8], [3, 5, 7], [7, 8, 9], [3, 6, 9]]
@@ -29,6 +54,10 @@ class Game
     sign = "X" 
 
     @player_two = Player.new(name, sign)
+
+    # Show the Board
+    @board = Board.new
+    @board.show
 
     # Variable to keep track ot player turn 
     @turn = true
@@ -71,8 +100,12 @@ class Game
         @current_player.positions.push(@position_played) unless @position_played.zero? || @position_played == 10
       end
     end
-    puts "#{@player_two.positions} player two position"
-    puts "#{@player_one.positions} player one position"
+    
+    # Update board
+    @board.update(@current_player.positions[-1], @current_player.sign)
+
+    # Show the board
+    @board.show
     
     # Update is_winner 
     winner?(@current_player.name, @current_player.positions)
@@ -99,7 +132,7 @@ def main
     game.play 
     game.play_count += 1
     if game.play_count == 9
-      puts "It is a tie game"
+      puts "It is a tie game" unless game.is_winner
       break
     end
   end
