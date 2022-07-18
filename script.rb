@@ -127,120 +127,22 @@ class Game
 end
 
 def main
-  game = Game.new
-  until game.is_winner 
-    game.play 
-    game.play_count += 1
-    if game.play_count == 9
-      puts "It is a tie game" unless game.is_winner
-      break
+
+  replay = "y"
+  while replay == "y"
+    game = Game.new
+    until game.is_winner 
+      game.play 
+      game.play_count += 1
+      if game.play_count == 9
+        puts "It is a tie game" unless game.is_winner
+        break
+      end
     end
+    puts "press 'y' or 'Y' for another game"
+    replay = gets.chomp.downcase
   end
 end
 
 main
 
-# Show the board
-
-# Take player moov
-
-# Check if there is a winning combination
-
-# Publish the winner
-
-# Start the game
-# def game
-#   # Take player input and create player
-#   while Player.numberofplayers < 2
-#     puts "Enter your name player #{Player.numberofplayers + 1}"
-#     name = gets.chomp
-
-#     puts "Enter your sign player #{Player.numberofplayers + 1}"
-#     sign = gets.chomp 
-
-#     if Player.numberofplayers == 0
-#       player_one = Player.new(name, sign)
-#     else
-#       player_two = Player.new(name, sign)
-#     end
-#   end
-
-#   # puts player_one.name
-#   # puts player_two.name
-#   # puts player_one.sign
-#   # puts player_two.sign
-
-#   # Repeat there is no winner or no tie
-#   is_winner = false
-
-#   # To keep track of the player turn
-#   player_turn = player_one
- 
-#   # Number of plays
-#   number_of_plays = 0
-
-#   # Display the board
-
-#   until is_winner || number_of_plays >= 9
-#     position_is_free = false
-    
-#     until position_is_free
-#       puts "#{player_turn.name} your turn, chosse your position"
-#       position = gets.chomp.to_i
-#     end
-
-#     # Check if the position is available
-#     position_is_free = player_turn.positions.include?(position)
-    
-#     # Update player positions array
-#     player_turn.positions.push(position) 
-
-#     # update the board
-#     # DisplayBoard
-
-#     # Check if there is a winning combination
-
-#     puts "#{player_turn.positions} "
-   
-#     # Update the number of plays
-#     number_of_plays += 1
-#     result = number_of_plays == 9 ? "it is a tie" : ""
-#     # Change player_turn
-#     player_turn = player_turn == player_one ? player_two : player_one
-#   end 
-
-#   puts result
-# end
-
-# def play
-
-#     # is_winner = 0
-
-#     # To keep track of the position already occupied
-#     @positions = []
-#     @current_position = 0
-
-#     # until is_winner > 9
-
-#       @current_player = @turn ? @player_one : @player_two
-    
-      
-#       # puts "positions #{@positions}"
-      
-#       puts " conditions include #{@positions.include?(@current_position)}"
-  
-#       # Repeat until the position of the player is from 1 to 9 and not already used
-#       until @current_position > 0 && @current_position < 10
-#         puts "#{@current_player.name} choose your position: "
-#         @current_position = gets.chomp.to_i
-#         @current_player.positions.push(@current_position) unless @positions.include?(@current_position)
-#         @positions.push(@current_position) unless @positions.include?(@current_position)
-#         puts "player positions array #{@current_player.positions}"
-#       end
-      
-#       puts "positions #{@positions}"
-#       # Check if there is a winner 
-#       @turn = !@turn
-#       # is_winner += 1
-#     # end
-#   end
